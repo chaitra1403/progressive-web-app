@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <style>
+
+    body{
+        background-image: url("Abc.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-size: 100%
+    }
+    p{
+      font-size:130%;
+      font-width:100%;
+    }
+    table, tr, td {
+      border: 1px solid black;
+      background-color:  #b3d9ff;
+      color:black;
+
+    }
+    </style>
+<link rel="manifest" href="/manifest.json">
+    </head>
+
+
+
+    <body ><center>
+        <h1>Github Profile</h1>
+        <input type="text" id="text_input">
+        <input type="button" onclick="gitdata()" value="get profile">
+        <div id='git_image'>
+            <img src="" alt="profile image" id="image">
+       <!--     <p style="background-color: Powderblue;color:blue;font-size:130%;width:100%;word-wrap: break-word;" id='para'></p> -->
+<div background="imageee.jpeg">
+            <table >
+              <tr>
+                  <td>LOGIN=></td> <td><p id='login'></p></td></tr><tr><br><br><br>
+                  <td>LOCATION=></td><td> <p id='loc'></p></td></tr><tr>
+                  <td>ID </td><td> <p id='gitid'></p></td></tr></table><table><tr>
+                  <td>NODE_ID=></td> <td><p id='nodeid'></p></td></tr><tr>
+                  <td>AVATAR_URL=></td> <td><p id='avatar'></p></td></tr><tr>
+                  <td>URL=></td> <td><p id='url'><p></td></tr><tr>
+                  <td>HTML_URL=></td> <td><p id='html_url'></p></td></tr><tr>
+                  <td>FOLLOWERS_URL=></td> <td><p id='followers_url'></p></td></tr><tr>
+                  <td>GIST_URL=></td> <td><p id='gists_url'></p></td></tr><tr>
+                  <td>STARRED_URL=></td> <td><p id='starred_url'></p></td></tr><tr>
+                  <td>SUBSCRIPTION_URL=></td> <td><p id='subscriptions_url'></p></td></tr><tr>
+                  <td>ORGASNISATION_URL=></td> <td><p id='organizations_url'></p></td></tr><tr>
+                  <td>REPOS_URL=></td> <td><p id='repos_url'></p></td></tr><tr>
+                  <td>EVENTS_URL=></td> <td><p id='events_url'></p></td></tr><tr>
+                  <td>RECEIVED_EVENTS_URL=></td> <td><p id='received_events_url'></p></td></tr><tr>
+                  <td>TYPE=></td> <td><p id='type'></p></td></tr><tr>
+                  <td>SITE_ADMIN=></td> <td><p id='site_admin'></p></td></tr><tr>
+                  
+              </tr>
+            </table>
+</div>
+        </div>
+    </body>
+<script>
+
+    function gitdata(){
+
+    var url='https://api.github.com/users/'+document.getElementById('text_input').value;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.avatar_url)
+        var im = document.getElementById("image");
+        im.setAttribute("src",data.avatar_url);
+
+        var gi= document.getElementById('para');
+        //gi.innerHTML=JSON.stringify(data);
+
+        document.getElementById("login").innerHTML = data.login;
+        document.getElementById("loc").innerHTML = data.location;
+        document.getElementById("gitid").innerHTML = data.id;
+        document.getElementById("nodeid").innerHTML = data.node_id;
+        document.getElementById("avatar").innerHTML = data.avatar_url;
+        document.getElementById("url").innerHTML = data.url;
+        document.getElementById("html_url").innerHTML = data.html_url;
+        document.getElementById("followers_url").innerHTML = data.followers_url;
+        document.getElementById('gists_url').innerHTML=data.gists_url;
+        document.getElementById('starred_url').innerHTML=data.starred_url;
+        document.getElementById('subscriptions_url').innerHTML=data.subscriptions_url;
+        document.getElementById('organizations_url').innerHTML=data.organizations_url;
+        document.getElementById('repos_url').innerHTML=data.repos_url;
+        document.getElementById('events_url').innerHTML=data.events_url;
+        document.getElementById('received_events_url').innerHTML=data.received_events_url;
+        document.getElementById('type').innerHTML=data.type;
+        document.getElementById('site_admin').innerHTML=data.site_admin;
+
+
+        //document.getElementById("nodeid").innerHTML = data.node_id;
+
+    })
+
+    .catch(function(response){
+        return response.status;
+        console.log(response.status);
+    });;
+
+}
+
+
+   if('serviceWorker' in navigator){
+        window.addEventListener('load',()=>{
+            navigator.serviceWorker.register('sw.js')
+        .then(registration =>{
+            console.log('service worker is registered',registration);
+        })
+        .catch(err =>{
+            console.log('Registration failed',err);
+        })
+        })
+    }  
+
+</script></center>
+</html>
